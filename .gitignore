@@ -1,0 +1,16 @@
+# Directories
+node_modules/
+dist/
+build/
+coverage/
+
+# Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db

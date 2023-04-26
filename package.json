@@ -32,6 +32,7 @@
     "@types/morgan": "^1.9.4",
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.8",
+    "@types/passport-local": "^1.0.35",
     "ts-node-dev": "^2.0.0",
     "tsc-watch": "^6.0.0",
     "typescript": "^5.0.4"

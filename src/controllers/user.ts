@@ -1,12 +1,8 @@
 import bcrypt from 'bcrypt'
 import { User } from "../models/user";
+import { UserInterface } from '../types';
 
-interface UserSignUp {
-    email: string;
-    password: string
-}
-
-export const userSignUp = async ( { password, email }: UserSignUp ) => {
+export const userSignUp = async ( { password, email }: UserInterface ) => {
     try {
         const hashPassword = await bcrypt.hash(password, 10)
         const user = new User({

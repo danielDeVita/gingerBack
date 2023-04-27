@@ -28,3 +28,13 @@ export const getUsers = async () => {
         return error.message;
     }
 }
+
+export const getUserById = async (id: string) => {
+    try {
+        const foundUser = await User.findById(id).select('-password')
+        if (!foundUser) throw new Error('No hay usuarios con ese id');
+        return foundUser;
+    } catch (error: any) {
+        return error.message;
+    }
+}

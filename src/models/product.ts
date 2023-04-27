@@ -21,7 +21,6 @@ const productSchema = new Schema ({
     image: {
         public_id: String,
         secure_url: String,
-        required: true,
     },
     price: {
         type: Number,

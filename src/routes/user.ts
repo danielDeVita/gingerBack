@@ -4,10 +4,10 @@ import jwt from 'jsonwebtoken'
 import passport from "passport";
 import { User } from "../models/user";
 
-export const route = express.Router()
+export const userRouter = express.Router()
 
 
-route.post('/signup', async (req, res) => {
+userRouter.post('/signup', async (req, res) => {
     const { email, password } = req.body
     try {
         if (!email || !password) throw new Error('Faltan campos requeridos')
@@ -21,7 +21,7 @@ route.post('/signup', async (req, res) => {
     }
 })
 
-route.post('/login', passport.authenticate('local', { session: false }), async (req, res) => {
+userRouter.post('/login', passport.authenticate('local', { session: false }), async (req, res) => {
     try {
         const user: any = req.user
         const payload = {
@@ -36,7 +36,7 @@ route.post('/login', passport.authenticate('local', { session: false }), async (
     }
 })
 
-route.get('/users', async (req, res) => {
+userRouter.get('/', async (req, res) => {
     try {
         const users = await getUsers();
         if (users.error) throw new Error(users.error)
@@ -46,7 +46,7 @@ route.get('/users', async (req, res) => {
     }
 })
 
-route.get('/users/:id', async (req, res) => {
+userRouter.get('/:id', async (req, res) => {
     try {
         const foundUser = await getUserById(req.params.id);
         if (foundUser.error) throw new Error(foundUser.error)

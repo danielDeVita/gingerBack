@@ -22,7 +22,8 @@
     "mongoose": "^7.0.5",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
-    "passport-local": "1.0.0"
+    "passport-local": "1.0.0",
+    "soft-delete-plugin-mongoose": "^1.0.15"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

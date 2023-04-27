@@ -3,13 +3,14 @@ import { User } from '../../../models/user'
 import bcrypt from 'bcrypt'
 
 
-export const LocalStrategy = new Strategy(async (email, password, done) => {
+const LocalStrategy = new Strategy({ usernameField: "email" },async (email, password, done) => {
     try {
-      const user: any = await User.find({ email })
+      const user: any = await User.findOne({ email })
       if (!user) {
         throw new Error('Usuario inexistente')
       }
-      const isMatch = await bcrypt.compare(password, user.password)
+      const isMatch = await bcrypt.compare(password, user.password )
+      console.log('execute')
       if (!isMatch) {
         throw new Error('Contraseña incorrecta')
       }
@@ -17,4 +18,6 @@ export const LocalStrategy = new Strategy(async (email, password, done) => {
     } catch (error) {
       done(error)
     }
-  })
+})
+
+export default LocalStrategy

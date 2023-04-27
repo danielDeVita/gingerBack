@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { route } from './routes/user';
+require('./utils/auth')
 
 const app = express();
 

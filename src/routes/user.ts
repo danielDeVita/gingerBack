@@ -1,5 +1,5 @@
 import express from "express";
-import { userSignUp } from "../controllers/user";
+import { userSignUp, getUsers } from "../controllers/user";
 import jwt from 'jsonwebtoken'
 import passport from "passport";
 import { User } from "../models/user";
@@ -33,5 +33,15 @@ route.post('/login', passport.authenticate('local', { session: false }), async (
         return res.json({ token, user: response })
     } catch (error: any) {
         return res.status(400).json({ error: error.message })
+    }
+})
+
+route.get('/users', async (req, res) => {
+    try {
+        const users = await getUsers();
+        if (users.error) throw new Error(users.error)
+        return res.status(200).json(users)
+    } catch (error) {
+        return res.status(400).send(error)
     }
 })

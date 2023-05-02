@@ -41,7 +41,7 @@ export const getUserById = async (id: string) => {
 
 export const deleteUser = async (id: string) => {
     try {
-        const userDeleted = await User.findByIdAndDelete(id)
+        const userDeleted = await User.findByIdAndUpdate(id, {isDeleted: true}, { new: true })
         return userDeleted
     } catch (error: any) {
         throw new Error(error)

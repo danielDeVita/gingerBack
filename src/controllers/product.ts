@@ -1,4 +1,7 @@
 import { Product } from "../models/product";
+import { ProductInterface, type Product as ProductType} from '../types';
+
+
 
 export const getProducts = async () => {
     try {
@@ -9,6 +12,16 @@ export const getProducts = async () => {
         return error.message;
     }
 }
+
+export const createNewProduct = async (product: ProductType) => {
+    try {
+        const newProduct = new Product(product) 
+        const saveProduct = await newProduct.save()
+        if (!saveProduct) throw new Error('No se pudo crear el producto')
+        return saveProduct
+    } catch (err: any) {
+        throw new Error(err.message)
+}}
 
 export const getProduct = async (id: string) => {
     try {

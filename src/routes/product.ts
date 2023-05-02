@@ -1,5 +1,6 @@
 import express from 'express';
-import { getProducts, getProduct } from '../controllers/product'
+import { type Product } from '../types';
+import { getProducts, getProduct, createNewProduct} from '../controllers/product'
 
 export const productRouter = express.Router()
 
@@ -13,6 +14,16 @@ productRouter.get('/', async (req, res) => {
     }
 })
 
+productRouter.post('/', async (req, res) => {
+    try {
+        const { name, description, category, image, price } = req.body
+        if (!name || !description || !category || !image || !price) throw new Error('Faltan campos')
+        const newProduct = await createNewProduct({ name, description, category, image, price } as Product)
+        res.status(201).json({ product: newProduct })
+    } catch (err: any) {
+        return res.status(400).json({ error: err.message })
+    }
+})
 productRouter.get('/:id', async (req, res) => {
     try {
         const { id } = req.params

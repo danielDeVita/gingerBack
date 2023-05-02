@@ -1,5 +1,5 @@
 import express from "express";
-import { userSignUp, getUsers, getUserById } from "../controllers/user";
+import { userSignUp, getUsers, getUserById, deleteUser } from "../controllers/user";
 import jwt from 'jsonwebtoken'
 import passport from "passport";
 import { User } from "../models/user";
@@ -53,4 +53,14 @@ userRouter.get('/:id', async (req, res) => {
     } catch (error: any) {
         return res.status(400).json({ error: error.message })
     }
+})
+
+userRouter.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const userDeleted = await deleteUser(id)
+        res.status(200).json({ user: userDeleted, message: 'Usuario eliminado'})
+    } catch (err: any) {
+        res.status(400).json({ error: err.message })
+    } 
 })

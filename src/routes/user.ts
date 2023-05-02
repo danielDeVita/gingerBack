@@ -6,7 +6,6 @@ import { User } from "../models/user";
 
 export const userRouter = express.Router()
 
-
 userRouter.post('/signup', async (req, res) => {
     const { email, password } = req.body
     try {

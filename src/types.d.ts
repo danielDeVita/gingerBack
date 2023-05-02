@@ -15,10 +15,3 @@ export interface ProductInterface extends Document{
     }
     price: number;
 }
-
-export interface Product {
-    name: string
-    description: string
-    price: number
-    image: string
-}

@@ -1,7 +1,5 @@
 import { Product } from "../models/product";
-import { ProductInterface, type Product as ProductType} from '../types';
-
-
+import { ProductInterface} from '../types';
 
 export const getProducts = async () => {
     try {
@@ -9,11 +7,19 @@ export const getProducts = async () => {
         if (!products.length) throw new Error("No se encontraron productos en la base de datos")
         return products;
     } catch (error: any) {
-        return error.message;
+        return error.message
     }
 }
 
-export const createNewProduct = async (product: ProductType) => {
+export const updateProduct = async (id: string, product: ProductInterface)  => {
+    try {
+    return await Product.findByIdAndUpdate(id, product, {new: true})
+ } 
+ catch (error: any) {
+    return error.message;
+ }}
+
+export const createNewProduct = async (product: ProductInterface) => {
     try {
         const newProduct = new Product(product) 
         const saveProduct = await newProduct.save()

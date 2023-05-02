@@ -9,7 +9,7 @@ const CLUSTER: string = process.env.CLUSTER!;
 
 export default async function connect(): Promise<void> {
     try {
-        await mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}.mongodb.net/Ginger`, {
+        await mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}.mongodb.net`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         } as mongoose.ConnectOptions);

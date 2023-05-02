@@ -26,7 +26,7 @@ export const createNewProduct = async (product: ProductType) => {
 export const getProduct = async (id: string) => {
     try {
         const product = await Product.findById(id)
-        if (!product) throw new Error("No se encontraron productos en la base de datos")
+        if (!product) throw new Error("No se encontraron productos en la base de datos con ese ID")
         return product;
     } catch (error: any) {
         return error.message;

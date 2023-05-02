@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import { UserInterface } from "../types";
 
 const Schema = mongoose.Schema
+
+import { softDeletePlugin, SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 
 const userSchema = new Schema({
     email: {
@@ -16,4 +19,6 @@ const userSchema = new Schema({
     }
 })
 
-export const User = mongoose.model('User', userSchema)
+/* userSchema.plugin(softDeletePlugin) */
+
+export const User = mongoose.model<UserInterface, SoftDeleteModel<UserInterface>>('User', userSchema)

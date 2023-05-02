@@ -3,6 +3,7 @@ import { userSignUp, getUsers, getUserById, deleteUser } from "../controllers/us
 import jwt from 'jsonwebtoken'
 import passport from "passport";
 import { User } from "../models/user";
+import { UserInterface } from "../types";
 
 export const userRouter = express.Router()
 
@@ -10,7 +11,7 @@ userRouter.post('/signup', async (req, res) => {
     const { email, password } = req.body
     try {
         if (!email || !password) throw new Error('Faltan campos requeridos')
-        const user = await userSignUp({ email, password })
+        const user = await userSignUp({ email, password } as UserInterface)
         return res.status(201).json({ user })
     } catch (error: any) {
         if (error.name === 'MongoServerError' && error.code === 11000) {
@@ -59,8 +60,8 @@ userRouter.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params
         const userDeleted = await deleteUser(id)
-        res.status(200).json({ user: userDeleted, message: 'Usuario eliminado'})
+        return res.status(200).json({ user: userDeleted, message: 'Usuario eliminado' })
     } catch (err: any) {
-        res.status(400).json({ error: err.message })
-    } 
+        return res.status(400).json({ error: err.message })
+    }
 })

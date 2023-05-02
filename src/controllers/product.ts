@@ -8,6 +8,15 @@ export const getProducts = async () => {
         if (!products.length) throw new Error("No se encontraron productos en la base de datos")
         return products;
     } catch (error: any) {
-        return error.message;
+        return error.message
     }
+}
+
+export const updateProduct = async (id: string, product: ProductInterface)  => {
+    try {
+    return await Product.findByIdAndUpdate(id, product, {new: true})
+ } 
+ catch (error: any) {
+    return error.message;
+ }
 }
